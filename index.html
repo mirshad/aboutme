@@ -1,441 +1,94 @@
-<!-- Basic HTML Document -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <title>My First HTML5 Page</title>
-  <!-- Bootstrap CDN -->
-  <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-  crossorigin="anonymous"/>
-  <!-- link to chart js lib -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="ASP.Net Web Application Developer and Responsive Web site Builder.">
+    <meta name="keywords" content="Web App Dev, Web Application Developer, Responsive Web Site Developer, QR Generator, QR Contact Generator, JSON Formatter, Pretty print JSON">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <title>The Web Application Developer - Home</title>
+    <link rel="stylesheet" href="css/bundle.min.css">
 
 </head>
+
 <body>
-    <!-- Bootstrap Navbar with collapable menu -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <!-- Brand name and logo -->
-            <a class="navbar-brand" href="#">
-                My Bootstrap Website
-            </a>
-            <!-- Collapsed menu -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-        </div>
-    </nav>
-
-<!-- bootstrap tabs, with 2 tabs, first one called Data, second one called Chart -->
     <div class="container">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-            <!-- data tab -->
-                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Data</a>
-            </li>
-            <li class="nav-item">
-            <!-- chart tab -->
-                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Chart</a>
-            </li>
-        </ul>
-    </div>
+        <div>
+            <h2>Hi, I am Mohammed Irshad Ul Haq, Web Application Developer</h2>
+        </div>
+        <div id="main-container">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
 
-<!-- bootstrap tab content, 2 tabs, 1 for data, 1 for chart -->
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel">
-            <!-- bootstrap form with 1 row and 2 columns, each column contains 1 bootstrap input, 1 for income, 1 for expenses -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <span for="january" class="fw-bold">January</span>
-                        <div class="input-group mb-3">
-                            <span  class="input-group-text" for="januaryIncome">Income</span>
-                            <input  class="form-control" type="number" id="januaryIncome" value="231" name="januaryIncome">
-                      
-                            <span class="input-group-text" for="januaryExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="januaryExpenses" value="563" name="januaryExpenses">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="images/expertise.png" alt="Microsoft .Net">
+                        <div class="carousel-caption">
+                            <h3>.Net Development</h3>
+                            <p>C# and VB</p>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-6">
-                        <span for="february" class="fw-bold">February</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="februaryIncome">Income</span>
-                            <input  class="form-control" type="number" id="februaryIncome" value="1000" name="februaryIncome">
-                       
-                            <span class="input-group-text" for="februaryExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="februaryExpenses" value="1200" name="februaryExpenses">
+                    <div class="item">
+                        <img src="images/WebAPI.png" alt="...">
+                        <div class="carousel-caption">
+                            <h3>Web API</h3>
+                            <p>Basic and HMAC Authentication</p>
+                        </div>
+                    </div>
+                    <div class="item ">
+                        <img src="images/Responsive-Web-Design.png">
+                        <div class="carousel-caption dark">
+                            <h3>Responsive Web Design</h3>
+                            <p>Bootstrap</p>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <span for="march" class="fw-bold">March</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="marchIncome">Income</span>
-                            <input  class="form-control" type="number" id="marchIncome" value="345" name="marchIncome">
-                      
-                            <span class="input-group-text" for="marchExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="marchExpenses" value="654" name="marchExpenses">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <span for="april" class="fw-bold">April</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="aprilIncome">Income</span>
-                            <input  class="form-control" type="number" id="aprilIncome" value="1234" name="aprilIncome">
-                        
-                            <span class="input-group-text" for="aprilExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="aprilExpenses" value="1000" name="aprilExpenses">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <span for="may" class="fw-bold">May</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="mayIncome">Income</span>
-                            <input  class="form-control" type="number" id="mayIncome" value="766" name="mayIncome">
-                      
-                            <span class="input-group-text" for="mayExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="mayExpenses" value="771" name="mayExpenses">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <span for="june" class="fw-bold">June</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="juneIncome">Income</span>
-                            <input  class="form-control" type="number" id="juneIncome" value="345" name="juneIncome">
-                       
-                            <span class="input-group-text" for="juneExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="juneExpenses" value="456" name="juneExpenses">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <span for="july" class="fw-bold">July</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="julyIncome">Income</span>
-                            <input  class="form-control" type="number" id="julyIncome" value="754" name="julyIncome">
-                      
-                            <span class="input-group-text" for="julyExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="julyExpenses" value="223" name="julyExpenses">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <span for="august" class="fw-bold">August</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="augustIncome">Income</span>
-                            <input  class="form-control" type="number" id="augustIncome" value="987" name="augustIncome">
-                       
-                            <span class="input-group-text" for="augustExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="augustExpenses" value="887" name="augustExpenses">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <span for="september" class="fw-bold">September</span>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" for="septemberIncome">Income</span>
-                            <input  class="form-control" class="form-control" type="number" value="956" id="septemberIncome" name="septemberIncome">
-                        
-                            <span class="input-group-text" for="septemberExpenses">Expenses</span>
-                            <input  class="form-control"  type="number" id="septemberExpenses" value="800" name="septemberExpenses">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <span for="october" class="fw-bold">October</span>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" for="octoberIncome">Income</span>
-                            <input  class="form-control" type="number" class="form-control" value="785" id="octoberIncome" name="octoberIncome">
-                        
-                            <span class="input-group-text" for="octoberExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="octoberExpenses" value="800" name="octoberExpenses">
-                        </div>
-                    </div>  
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <span for="november" class="fw-bold">November</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="novemberIncome">Income</span>
-                            <input  class="form-control" type="number" id="novemberIncome" value="678" name="novemberIncome">
-                        
-                            <span class="input-group-text" for="novemberExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="novemberExpenses" value="664" name="novemberExpenses">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <span for="december" class="fw-bold">December</span>
-                        <div class="input-group">
-                            <span class="input-group-text" for="decemberIncome">Income</span>
-                            <input  class="form-control "type="number" id="decemberIncome" value="898" name="decemberIncome">
-                       
-                            <span class="input-group-text" for="decemberExpenses">Expenses</span>
-                            <input  class="form-control" type="number" id="decemberExpenses" value="800" name="decemberExpenses">
-                        </div>
-                    </div>
-                </div>
-                <button id="updateChart" class="btn btn-primary">Update Chart</button>
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel">
-        <div class="container">
-            <!-- bootstrap canvas to draw chart -->
-            <canvas id="myChart" width="600" height="400"></canvas>
-            <!-- bootstrap button to download chart as png -->
-             <button id="downloadChart" class="btn btn-primary">Download Chart</button> 
-        </div>
-        </div>  
+        <footer class="nav nav-bottom">
+            thewebappdev &copy; All rights reserved 2018
+            <br />
+            <a class="font-blue" href="about.html">About me</a> |
+            <a class="font-blue" href="mailto:contactus@thewebappdev.com">Contact Me</a> |
+            <a class="font-blue" href="QRGenerator.html">QR-Generator</a> |
+            <a class="font-blue" href="FormatJSON.html">Format JSON</a>
+        </footer>
     </div>
-
-
-       
-
-
-    <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://kit.fontawesome.com/c9a033ef5a.js"
-    crossorigin="anonymous"
-  ></script>
-<script >
-var myChart;
-
-function GetIncome() {
-    // get input value from januaryIncome
-    var januaryIncome = document.getElementById("januaryIncome").value;
-    // get input value from februaryIncome
-    var februaryIncome = document.getElementById("februaryIncome").value;
-    // get input value from marchIncome
-    var marchIncome = document.getElementById("marchIncome").value; 
-    // get input value from aprilIncome
-    var aprilIncome = document.getElementById("aprilIncome").value;
-    // get input value from mayIncome
-    var mayIncome = document.getElementById("mayIncome").value;
-    // get input value from juneIncome
-    var juneIncome = document.getElementById("juneIncome").value;
-    // get input value from julyIncome
-    var julyIncome = document.getElementById("julyIncome").value;
-    // get input value from augustIncome
-    var augustIncome = document.getElementById("augustIncome").value;
-    // get input value from septemberIncome
-
-    var septemberIncome = document.getElementById("septemberIncome").value;
-    // get input value from octoberIncome
-    var octoberIncome = document.getElementById("octoberIncome").value;
-    // get input value from novemberIncome
-    var novemberIncome = document.getElementById("novemberIncome").value;
-    // get input value from decemberIncome
-    var decemberIncome = document.getElementById("decemberIncome").value;
-    return [januaryIncome, februaryIncome, marchIncome, aprilIncome, mayIncome, juneIncome, julyIncome, augustIncome, 
-        septemberIncome, octoberIncome, novemberIncome, decemberIncome];
-}
-
-function GetExpense() { 
-    // get input value from januaryExpense
-    var januaryExpense = document.getElementById("januaryExpenses").value;
-    // get input value from februaryExpense
-    var februaryExpense = document.getElementById("februaryExpenses").value;
-    // get input value from marchExpense
-    var marchExpense = document.getElementById("marchExpenses").value;
-    // get input value from aprilExpense
-    var aprilExpense = document.getElementById("aprilExpenses").value;
-    // get input value from mayExpense
-    var mayExpense = document.getElementById("mayExpenses").value;
-
-    // get input value from juneExpense
-    var juneExpense = document.getElementById("juneExpenses").value;
-    // get input value from julyExpense
-    var julyExpense = document.getElementById("julyExpenses").value;
-    // get input value from augustExpense
-    var augustExpense = document.getElementById("augustExpenses").value;
-    // get input value from septemberExpense
-    var septemberExpense = document.getElementById("septemberExpenses").value;
-    // get input value from octoberExpense
-    var octoberExpense = document.getElementById("octoberExpenses").value;
-    // get input value from novemberExpense
-    var novemberExpense = document.getElementById("novemberExpenses").value;
-    // get input value from decemberExpense
-    var decemberExpense = document.getElementById("decemberExpenses").value;
-    return [januaryExpense, februaryExpense, marchExpense, aprilExpense, mayExpense, juneExpense, julyExpense, augustExpense, 
-        septemberExpense, octoberExpense, novemberExpense, decemberExpense];
-}
-
-// on window load
-window.onload = function() {
-    
-    
-    
-    // Create Chart.js bar chart for id myChart
-    myChart = new Chart(document.getElementById("myChart"), {
-        // set type to bar chart
-        type: 'bar',
-        // set data for the chart
-        data: {
-            // set labels for the x-axis
-            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", 
-            "October", "November", "December"],
-            // set datasets
-            datasets: [
-                // set data for the income dataset
-                {
-                    // label for the dataset
-                    label: "Income",
-                    // set data for the dataset
-                    data: GetIncome(),
-                    // set background color for the dataset
-                    backgroundColor: "#3e95cd",
-                    // set border color for the dataset
-                    borderColor: "#3e95cd",
-                    // set fill color for the dataset
-                    fill: false
-                },
-                // set data for the expense dataset
-                {
-                    // label for the dataset
-                    label: "Expense",
-                    // set data for the dataset
-                    data: GetExpense(),
-                    // set background color for the dataset
-                    backgroundColor: "#8e5ea2",
-                    // set border color for the dataset
-                    borderColor: "#8e5ea2",
-                    // set fill color for the dataset
-                    fill: false
-                }
-            ]
-        },
-        // set options for the chart
-        options: {
-            // set title for the chart
-            title: {
-                // set display for the title
-                display: true,
-                // set text for the title
-                text: 'Income vs. Expense'
-            },
-            // set tooltips 
-            tooltips: {
-                // set mode
-                mode: 'index',
-                // set intersect
-                intersect: false
-            },
-            // set responsive
-            responsive: false,   
-            // set scales
-            scales: {
-                // set xAxes
-                xAxes: [{
-                    // set stacked
-                    stacked: true,
-                    // set scaleLabel
-                    scaleLabel: {
-                        // set display
-                        display: true,
-                        // set labelString
-                        labelString: 'Month'
-                    }
-                }],
-                // set yAxes
-                yAxes: [{
-                    // set stacked
-                    stacked: true,
-                    // set scaleLabel
-                    scaleLabel: {
-                        // set display
-                        display: true,
-                        // set labelString
-                        labelString: 'Amount'
-                    }
-                }]
-            },
-            // set legend
-            legend: {
-                // set position
-                position: 'bottom'
-            },
-            // set plugins
-            plugins: {
-                // set datalabels
-                datalabels: {
-                    // set anchor
-                    anchor: 'end',
-                    // set align
-                    align: 'end',
-                    // set offset
-                    offset: -20,
-                    // set color
-                    color: '#666',
-                    // set font
-                    font: {
-                        // set weight
-                        weight: 'bold'
-                    },
-                    // set formatter
-                    formatter: function(value, context) {
-                        // return value
-                        return value;
-                    }
-                },
-                // set labels
-                labels: {
-                    // set render
-                    render: 'value',
-                    // set precision
-                    precision: 2
-                },
-                // set colorschemes
-                colorschemes: {
-                    // set scheme
-                    scheme: 'brewer.Paired12'
-                }
-            },
-            // set hover
-           
-            // set maintainAspectRatio
-            maintainAspectRatio: true,
-
-
-        }
-    });
-    document.getElementById("updateChart").addEventListener("click", refreshChart);   
-    document.getElementById("downloadChart").addEventListener("click", downloadChart);
-}
-// method to refresh the chart
-function refreshChart() {
-    
-    // update data for the income dataset
-    myChart.data.datasets[0].data = GetIncome();
-    // update data for the expense dataset
-    myChart.data.datasets[1].data = GetExpense();
-    // update chart
-    myChart.update();
-}
-
-//method to download the chart
-function downloadChart() {
-    // get the canvas element
-    var canvas = document.getElementById("myChart");
-    // get the image URI
-    var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
-    // trigger the download
-    var link = document.createElement('a');
-    link.download = "myChart.png";
-    link.href = image;
-    link.click();
-}
-
-
-</script>
+    <div class="homepage-hero-module">
+        <div class="video-container">
+            <div class="filter"></div>
+            <video poster="media/Love-Coding.jpg" class="fillWidth" playsinline autoplay muted loop>
+                <source src="media/Love-Coding.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                <source src="media/Love-Coding.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            </video>
+            <div class="poster hidden">
+                <img src="media/Love-Coding.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <script src="js/bundle.min.js"></script>
 </body>
+
 </html>
