@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="ASP.Net Web Application Developer and Responsive Web site Builder.">
+    <meta name="keywords" content="Web App Dev, Web Application Developer, Responsive Web Site Developer, QR Generator, QR Contact Generator, JSON Formatter, Pretty print JSON">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <title>JSON Pretty Print</title>
+    <link rel="stylesheet" href="css/bundle.min.css">
+</head>
+
+<body class="qrgen">
+    <div class="container qrgen">
+        <div class="col-xs-12">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <legend>JSON Formatter</legend>
+                </div>
+
+                <div class="form-group">
+                    <label for="InputJSON" class="col-sm-2 control-label">Input JSON:</label>
+                    <div class="col-sm-10">
+                        <textarea name="InputJSON" id="InputJSON" class="form-control" rows="8" required="required"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Output JSON:</label>
+                    <div class="col-sm-10">
+                        <textarea readonly rows="20" name="txtOutputJSON" id="txtOutputJSON" class="form-control" rows="3" required="required"></textarea>
+
+                    </div>
+                </div>
+
+                <!--<div class="input-group col-sm-10 col-sm-offset-2">
+                <input id="foo" type="text" class="form-control" value="https://github.com/zenorocha/clipboard.js.git">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" onclick="copytext();">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>-->
+
+
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <button type="button" class="btn btn-default" onclick="formatJSON();">Format JSON</button>
+                        <button type="button" class="btn btn-primary" onclick="copytext();">Copy</button>
+
+                    </div>
+                </div>
+            </form>
+            <footer class="nav nav-bottom color">
+                thewebappdev &copy; All rights reserved 2018
+                <br />
+                <a class="font-blue" href="index.html">Home</a> |
+                <a class="font-blue" href="about.html">About me</a> |
+                <a class="font-blue" href="mailto:contactus@thewebappdev.com">Contact Me</a> |
+                <a class="font-blue" href="QRGenerator.html">QR-Generator</a>
+
+            </footer>
+        </div>
+    </div>
+    <script src="js/bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#InputJSON").on("paste drop", function (e) {
+                var pastedText;
+                if (window.clipboardData && window.clipboardData.getData) { // IE
+                    pastedText = window.clipboardData.getData('Text');
+                } else if (e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) { // other browsers
+                    pastedText = e.originalEvent.clipboardData.getData('text/plain');
+                }
+                //var value = e.originalEvent.clipboardData.getData('Text');
+                $("#OutputJSON").html(prettyJSON(pastedText));
+                $("#txtOutputJSON").val(prettyJSON(pastedText));
+            });
+        });
+
+        function prettyJSON(strInput) {
+            var obj;
+            try {
+                obj = JSON.parse(strInput);
+                return JSON.stringify(obj, null, 8);
+            } catch (ex) {
+                console.log(ex);
+                return 'Invalid JSON';
+            }
+
+        }
+
+        function formatJSON() {
+            $("#txtOutputJSON").val(prettyJSON($("#InputJSON").val()));
+        }
+
+        function copytext() {
+            var copyText = document.getElementById("txtOutputJSON");
+
+            /* Select the text field */
+            copyText.select();
+
+            /* Copy the text inside the text field */
+            document.execCommand("Copy");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="V-Card and Custom text QR Generator. Create your contact QR by providing contact details.">
+    <meta name="keywords" content="Web App Dev, Web Application Developer, Responsive Web Site Developer, QR Generator, QR Contact Generator, JSON Formatter, Pretty print JSON">
+    <title>QRCode generator</title>
+    <link rel="stylesheet" href="css/bundle.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+
+
+<body class="qrgen">
+    <div class="container qrgen">
+        <div class="row" style="margin:0;">
+            <form>
+            <div class="col-sm-6">
+
+
+                <legend>Create VCard</legend>
+
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" id="First" placeholder="First Name" required>
+                    <input type="text" class="form-control" id="Middle" placeholder="Middle Name">
+                    <input type="text" class="form-control" id="Last" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Organization</label>
+                    <input type="text" class="form-control" id="Org" placeholder="Organization">
+                </div>
+                <div class="form-group">
+                    <label for="">Job Title</label>
+                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="">Work Email</label>
+                    <input type="text" class="form-control" id="WorkEMail" placeholder="Work Email">
+                </div>
+                <div class="form-group">
+                    <label for="">Contact Number(Personal): </label>
+                    <input type="text" class="form-control" id="PersonalNumber" placeholder="Personal Mobile" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Contact Number(Work):</label>
+                    <input type="text" class="form-control" id="WorkNumber" placeholder=" Work Mobile">
+                </div>
+                <div class="form-group">
+                    <label for="">Work Address:</label>
+                    <input type="text" class="form-control" id="StreetAdd" placeholder="Street Address">
+                    <input type="text" class="form-control" id="City" placeholder="City">
+                    <input type="text" class="form-control" id="Region" placeholder="Region">
+                    <input type="text" class="form-control" id="ZipCode" placeholder="Zip Code">
+                    <input type="text" class="form-control" id="Country" placeholder="Country">
+                </div>
+                <div class="form-group">
+                    <label for="">Date Of Birth:</label>
+                    <input type="text" class="form-control" id="DoB" placeholder="Date of Birth(DD-MM-YYYY)">
+                    <input type="hidden" id="DoBVal" />
+                </div>
+                <div class="form-group">
+                    <label for="">Work URL:</label>
+                    <input type="text" class="form-control" id="WorkURL" placeholder="Work URL">
+                </div>
+
+
+
+
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <legend>Custom QR text</legend>
+                    <textarea id="text" class="form-control" rows="2" cols="10">https://www.thewebappdev.com</textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="vcqr">Generate V-Card QR Code</button>
+                    <button type="button" class="btn btn-warning" id="cqr">Generate Custom QR Code</button>
+                </div>
+                <legend> </legend>
+                <legend>QR Code</legend>
+                <div id="qrcode"></div>
+            </div>
+        </form>
+        </div>
+        <footer class="nav nav-bottom color">
+            thewebappdev &copy; All rights reserved 2018
+            <br />
+            <a class="font-blue" href="index.html">Home</a> |
+            <a class="font-blue" href="about.html">About me</a> |
+            <a class="font-blue" href="mailto:contactus@thewebappdev.com">Contact Me</a> |
+            <a class="font-blue" href="FormatJSON.html">Format JSON</a>
+
+        </footer>
+    </div>
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script src="js/bundle.min.js"></script>
+    <script language="javascript">
+        var qrcode = new QRCode("qrcode");
+
+        function makeCode() {
+            var elText = $("#text");
+
+            if (!elText.val()) {
+                elText.focus();
+                return;
+            }
+
+            qrcode.makeCode(elText.val());
+        }
+
+
+
+        $(document).ready(function () {
+            makeCode();
+            $("#DoB").daterangepicker({
+                    autoUpdateInput: true,
+                    autoApply: true,
+                    singleDatePicker: true,
+                    format: 'DD-MM-YYYY',
+                    showDropdowns: true,
+                    startDate: moment()
+                },
+                function (start, end) {
+                    $("#DoBVal").val(start.format('YYYYMMDD'));
+                });
+            $("#text").on("blur", function () {
+                makeCode();
+            }).on("keypress keyup", function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    makeCode();
+                }
+            });
+            $("#cqr").on("click", function(e){
+                makeCode();
+            })
+
+            $("#vcqr").on("click", function () {
+                if ($("#First").val() !== null && $("#Last").val() !== null && $("#PersonalNumber").val() !== null ) {
+                    $.get("data/vcard.txt", function (data) {
+                        /*data = data.replace('@First@', $("#First").val());
+                        data = data.replace('@Middle@', $("#Middle").val());
+                        data = data.replace('@Last@', $("#Last").val());
+                        data = data.replace('@FullName@', $("#First").val() + ' ' + $("#Middle")
+                            .val() +
+                            ' ' + $("#Last").val());
+                        data = data.replace('@Organization@', $("#Org").val());
+                        data = data.replace('@Title@', $("#Title").val());
+                        data = data.replace('@WorkEMail@', $("#WorkEMail").val());
+                        data = data.replace('@CellPhone@', $("#PersonalNumber").val());
+                        data = data.replace('@WorkNumber@', $("#WorkNumber").val());
+                        data = data.replace('@BirthDate@', $("#DoBVal").val());
+                        data = data.replace('@WorkURL@', $("#WorkURL").val());
+                        data = data.replace(/@AddWorkLine1@/g, $("#StreetAdd").val());
+                        data = data.replace(/@WorkCity@/g, $("#City").val());
+                        data = data.replace(/@WorkRegion@/g, $("#Region").val());
+                        data = data.replace(/@WorkPINCode@/g, $("#ZipCode").val());
+                        data = data.replace(/@WorkCountry@/g, $("#Country").val());*/
+
+                        data = data.replace('@First@', $("#First").val())
+                        .replace('@Middle@', $("#Middle").val())
+                        .replace('@Last@', $("#Last").val())
+                        .replace('@FullName@', $("#First").val() + ' ' + $("#Middle").val() +' ' + $("#Last").val())
+                        .replace('@Organization@', $("#Org").val())
+                        .replace('@Title@', $("#Title").val())
+                        .replace('@WorkEMail@', $("#WorkEMail").val())
+                        .replace('@CellPhone@', $("#PersonalNumber").val())
+                        .replace('@WorkNumber@', $("#WorkNumber").val())
+                        .replace('@BirthDate@', $("#DoBVal").val())
+                        .replace('@WorkURL@', $("#WorkURL").val())
+                        .replace(/@AddWorkLine1@/g, $("#StreetAdd").val())
+                        .replace(/@WorkCity@/g, $("#City").val())
+                        .replace(/@WorkRegion@/g, $("#Region").val())
+                        .replace(/@WorkPINCode@/g, $("#ZipCode").val())
+                        .replace(/@WorkCountry@/g, $("#Country").val());
+                        console.log(data);
+                        qrcode.makeCode(data);
+                    });
+                }
+                return false;
+            });
+
+        });
+
+        document.addEventListener("paste", function (e) {
+            e.preventDefault();
+            var pastedText = undefined;
+            if (window.clipboardData && window.clipboardData.getData) { // IE
+                pastedText = window.clipboardData.getData('Text');
+            } else if (e.clipboardData && e.clipboardData.getData) {
+                pastedText = e.clipboardData.getData('text/plain');
+            }
+            if (pastedText != undefined) {
+                $("#text").val(pastedText.substring(0, 1000));
+                $("#text").blur();
+            }
+            return false;
+        });
+    </script>
+</body>
+
+</html>
