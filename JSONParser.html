@@ -1,0 +1,208 @@
+<!-- Create html page that can parse JSON based on template-->
+<!doctype html>
+<html>
+
+<head>
+    <title>JSON Parser/Visualizer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <!-- Use Datatables to visualize JSON  -->
+    <script src="//cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css">
+    <style>
+        html,
+        body,
+        body>div {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        textarea {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!-- Bootstrap form with in-line form controls-->
+    <div class="container-fluid">
+        <div class="row" style="height: 100%;">
+            <div class="col-md-12" style="height: 100%;">
+                <h1>JSON Parser</h1>
+                <h2>
+                    This page will convert a JSON to a table.
+                </h2>
+
+                <div class="row" style="height: 100%;">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <p>
+                                <label for="inputTemplate">Enter Handlebar JSON Template here:</label>
+                            </p>
+                            <p>
+
+                                <textarea name="inputTemplate" class="form-control" id="inputTemplate" width="100%"
+                                    rows="10"></textarea>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <label for="inputText">Paste your JSON here:</label>
+                            </p>
+                            <p>
+                                <textarea name="inputText" class="form-control" id="inputText" width="100%"
+                                    rows="10"></textarea>
+                            </p>
+                        </div>
+                        <p>
+                            <button id="Vulnerability" class="btn btn-info">Vulnerability</button>
+                        </p>
+                        <p>
+                            <input class="btn btn-warning" type="file" name="inputfile" id="inputfile">
+                        </p>
+                        <p>
+                            <button id="convert" class="btn btn-primary">Convert</button>
+                        </p>
+                    </div>
+                    <div class="col-xs-6" style="height: 100%; overflow: auto; margin-top: -128px;">
+                        <div id="table"></div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function () {
+
+                    //load json file to textbox
+                    $.getJSON("sample.json", function (data) {
+                        $("#inputText").val(JSON.stringify(data, null, 4));
+                    });
+                    $("#inputTemplate").val(`<table id="table-data" class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Secret</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each this}}
+        <tr>
+            
+                <td>{{this.name}}</td>
+                <td>{{this.type}}</td>
+                <td>{{this.description}}</td>
+                <td>{{#each this.sc}}
+                    <strong>Name:</strong> {{keyName}}<br />
+                    <strong>Id:</strong> {{parseJSON this.id}}<br />
+                    {{#if this.expiryAt}}
+                    <strong>Expiry:</strong> {{parseJSON this.expiryAt}} 
+                    {{/if}}
+                    <hr />
+                    {{/each}}
+                </td>
+            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+                `);
+                    $("#convert").click(function () {
+                        var jsonData = document.getElementById("inputText").value;
+                        document.getElementById("table").innerHTML = visualizeJSON(jsonData);
+                        let dt = new DataTable('#table-data', {
+                            responsive: true,
+                            pageLength: 50
+                        });
+                    });
+                    $("#Vulnerability").click(function () {
+                        document.getElementById("inputTemplate").value = `
+                         <table id="table-data" class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    
+                        <th>Application Name</th>
+                        <th>FQDN</th>
+                        <th>IP Address</th>
+                        <th>Environment</th>
+                        <th>Technology</th>
+                        <th>Vuln Details</th>
+                        <th>CVE Description</th>
+        
+                </tr>
+            </thead>
+            <tbody>
+                {{#each this.data}}
+                <tr>
+                    
+                        <td>{{this.aa}}</td>
+                        <td>{{this.fqdn}}</td>
+                        <td>{{this.ipAddress}}</td>
+                        <td>{{this.environment}}</td>
+                        <td>{{this.technology}} </td>
+                        <td>{{this.det}} </td>
+                        <td>{{this.des}} </td>
+                    
+                </tr>
+               {{/each}}
+            </tbody>
+        </table>
+                            
+                        `
+                    });
+
+                    //implement File reader
+                    $("#inputfile").change(function () {
+                        var file = this.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var data = e.target.result;
+                            document.getElementById("inputText").value = JSON.stringify(JSON.parse(data), null, 4);
+                        }
+                        reader.readAsText(file);
+                    });
+
+                });
+
+                function visualizeJSON(data) {
+                    // Define the Handlebars template
+                    const template = Handlebars.compile(document.getElementById("inputTemplate").value);
+
+                    // Define the helper function to parse JSON
+                    Handlebars.registerHelper('parseJSON', function (value) {
+                        try {
+                            const parsedValue = JSON.parse(value);
+                            return JSON.stringify(parsedValue, null, 2);
+                        } catch (error) {
+                            return value;
+                        }
+                    });
+
+                    // Parse the JSON data
+                    const parsedData = JSON.parse(data);
+
+                    // Extract the headers and rows
+                    //const headers = Object.keys(parsedData[0]);
+                    //const rows = parsedData.map(row => Object.values(row));
+
+                    // Render the template
+                    const html = template(JSON.parse(data));
+
+                    // Return the generated HTML
+                    return html;
+                }
+
+
+            </script>
+</body>
+
+</html>
