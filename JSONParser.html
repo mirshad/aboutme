@@ -5,11 +5,7 @@
 <head>
     <title>JSON Parser/Visualizer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-    <!-- Use Datatables to visualize JSON  -->
-    <script src="//cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
+    
     <link rel="stylesheet" href="//cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css">
     <style>
         html,
@@ -63,7 +59,7 @@
                             </p>
                         </div>
                         <p>
-                            <button id="Vulnerability" class="btn btn-info">Vulnerability</button>
+                            <button id="sample2" class="btn btn-info">Sample Data 2</button>
                         </p>
                         <p>
                             <input class="btn btn-warning" type="file" name="inputfile" id="inputfile">
@@ -77,6 +73,12 @@
                     </div>
                 </div>
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+            <!-- Use Datatables to visualize JSON  -->
+            <script src="//cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
+
             <script>
                 $(document).ready(function () {
 
@@ -99,13 +101,13 @@
         <tr>
             
                 <td>{{this.name}}</td>
-                <td>{{this.type}}</td>
-                <td>{{this.description}}</td>
-                <td>{{#each this.sc}}
+                <td>{{this.email}}</td>
+                <td>{{this.username}}</td>
+                <td>{{#each this.address}}
                     <strong>Name:</strong> {{keyName}}<br />
-                    <strong>Id:</strong> {{parseJSON this.id}}<br />
-                    {{#if this.expiryAt}}
-                    <strong>Expiry:</strong> {{parseJSON this.expiryAt}} 
+                    <strong>Id:</strong> {{parseJSON this.street}}<br />
+                    {{#if this.zipcode}}
+                    <strong>Expiry:</strong> {{parseJSON this.zipcode}} 
                     {{/if}}
                     <hr />
                     {{/each}}
@@ -124,19 +126,17 @@
                             pageLength: 50
                         });
                     });
-                    $("#Vulnerability").click(function () {
+                    $("#sample2").click(function () {
                         document.getElementById("inputTemplate").value = `
                          <table id="table-data" class="table table-hover table-bordered">
             <thead>
                 <tr>
                     
                         <th>Application Name</th>
-                        <th>FQDN</th>
-                        <th>IP Address</th>
                         <th>Environment</th>
                         <th>Technology</th>
-                        <th>Vuln Details</th>
-                        <th>CVE Description</th>
+                        <th>Details</th>
+                        <th>Description</th>
         
                 </tr>
             </thead>
@@ -144,13 +144,11 @@
                 {{#each this.data}}
                 <tr>
                     
-                        <td>{{this.aa}}</td>
-                        <td>{{this.fqdn}}</td>
-                        <td>{{this.ipAddress}}</td>
+                        <td>{{this.app}}</td>
                         <td>{{this.environment}}</td>
                         <td>{{this.technology}} </td>
-                        <td>{{this.det}} </td>
-                        <td>{{this.des}} </td>
+                        <td>{{this.details}} </td>
+                        <td>{{this.desc}} </td>
                     
                 </tr>
                {{/each}}
